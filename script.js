@@ -7,24 +7,25 @@ renderError func. and  throw new Error();
 	asign data variable from res
 	call renderCountry func. w related slicing
 	catch error and clg(err)
-
-
 renderCountry() func. takes country and destructs it into related variables, writes with card style into inner HTML of empty countriesDiv 
-
 
 fetchCountry('turkey'); //test it with this
 
 */
-const fetchCountry = (name) => {
-	url = `https://restcountries.com/v3.1/name/${name}`
+//   FLAG INFO APP
+
+let varTemp_glob_1;
+const fetchCountry = async (name) => {
+	const url = `https://restcountries.com/v3.1/name/${name}`
 	try {
 		const res = await fetch(url);
 		if (!res.ok) {
 			renderError('Sth went wrong! : '+ res.status);
 			throw new Error();
 		}
-		const data = res.json();
+		const data = await res.json();
 		renderCountry(data[0]);
+		
 	} catch (error) {
 		console.log(error)
 	}
@@ -40,42 +41,65 @@ const renderError = (err) => {
 };
 
 const renderCountry = (country) => {
-	const countriesDiv = document.querySelector('.countries');
-
-	//? Destruction here:
-	const { 
-		flags: { svg },
-		name: {common }, 
-		region,
-		capital,
-		languages,
-		currencies,
-		population,
-	 }  =  country;
-
-	 // console.log(capital, common, region, svg);
-	 // console.log(Object.values(languages));
-	 // console.log(Object.values(currencies)[0].name);
-	 // console.log(Object.values(currencies)[0].symbol);
-
-	 countriesDiv.innerHTML += `
+	console.log(country);
+	const countriesDiv = document.querySelector(".countries");
+  
+	const {
+	  capital,
+	  name: { common },
+	  region,
+	  flags: { svg },
+	  languages,
+	  currencies,
+	} = country;
+  
+	countriesDiv.innerHTML = `
 	<div class="card shadow-lg" style="width: 18rem;">
-	 	<img class="card-img-top" src="${svg}" alt="flag-img">
-	 	<div class="card-body">
-	   		<h5 class="card-title">${common}</h5>
-	   		<p class="card-text">${region}</p>
-	 	</div>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">${capital}</li>
-			<li class="list-group-item">${languages}</li>
-			<li class="list-group-item">${currencies}</li>
-			<li class="list-group-item">${population}</li>
-		</ul>
- 	</div>
-	 `
-}
+	  <img src="${svg}" class="card-img-top" alt="...">
+	  <div class="card-body">
+		<h5 class="card-title">${common}</h5>
+		<p class="card-text">${region}</p>
+	  </div>
+	  <ul class="list-group list-group-flush">
+		<li class="list-group-item"> <i class="fas fa-lg fa-landmark"></i> ${capital}</li>
+		<li class="list-group-item"> <i class="fas fa-lg fa-comments"></i> ${Object.values(
+		  languages
+		)}</li>
+		<li class="list-group-item"> <i class="fas fa-lg fa-money-bill-wave"></i> ${
+		  Object.values(currencies)[0].name
+		} (${Object.values(currencies)[0].symbol}) </li>
+	  </ul>
+	</div>
+	`;
+  };
 
 
+  const countriesDiv = document.querySelector(".countries");
 
-fetchCountry('turkey');
+  const getCountry = async () => {
+	const lands = await fetch("https://restcountries.com/v3.1/all");
+	if (!lands.ok) {
+	  renderError(`Something went wrong: ${lands.status}`);
+	  throw new Error();
+	}
+	const data = await lands.json();
+	const countryNames1 = await data.map(function (item, index) {
+	  return item["name"].common;
+	});
+	// console.log(countryNames1);
+	const countryNames = countryNames1.sort()
+	// console.log(countryNames);
+	countryNames.forEach((x) => {
+	  nameSelector.innerHTML += `<option value=${x}>${x}</option>`
+	});
+  };
+  
+  const nameSelector = document.querySelector(".nameSelection");
+  getCountry();
+  
+  // const a  = <option value="volvo">Volvo</option>
+  
+  nameSelector.addEventListener("change", (e) => {
+	fetchCountry(nameSelector.value)
+  })
 

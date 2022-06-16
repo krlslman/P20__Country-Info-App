@@ -1,0 +1,67 @@
+body{
+	/* background-image: url('https://wallpaperaccess.com/full/553945.jpg'); */
+	/* background-image: url('https://cdn.wallpapersafari.com/9/32/YF5sBZ.jpg'); */
+	background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2012/09/30/17169/e0431804570890927ede03ed9090bb5d-1000.jpg');
+	/* no-repeat center center fixed; */
+    background-size: cover;
+	background-position: 50%;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+	scroll-behavior: smooth;
+}
+header {
+	text-align: center;
+	margin-bottom: 3vh;
+	margin-top: 3vh;
+		  /* border: red solid 2px; */
+	margin-left: 20vw ;
+	margin-right: 20vw ;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+}
+.container{
+	background-color: rgba(62, 61, 36, 0.534);
+	box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+   max-width: 60vw;
+   text-align: center;
+   position: relative;
+   margin-top: 10vh ;
+   margin-bottom: 2vh ;
+   border-radius: 20px;
+  }
+
+.container-combobox {
+	display: block;
+	justify-content: center;
+}
+
+.countries {
+	  /* border: red solid 2px; */
+	display: flex;
+	justify-content: center;
+	padding-bottom: 50px;
+  }
+  label, form {
+	display: block;
+	padding: 10px;
+  }
+  h1{
+	margin: 2vh;
+	color: white;
+	text-shadow: 0 0 10px black;
+	padding: 15px;
+  }
+  label{
+	color: white;
+	text-shadow: 0 0 10px black;
+  }
+.list-group-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#countrySelect{
+	width: 80%;
+	max-width: 450px;
+}
