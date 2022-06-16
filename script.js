@@ -103,3 +103,4 @@ const renderCountry = (country) => {
 	fetchCountry(nameSelector.value)
   })
 
+  fetchCountry('United States')
